@@ -3,19 +3,28 @@
   padding: 0;
 }
 
+colors {
+  color: #b1d1c5;
+  color: #cb9b42;
+  color: #f2f3ee;
+  color: #dbd7cb;
+}
+
 .App {
-  padding: 20px;;
+  padding: 20px;
 }
 
 nav.navbar { 
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #cb9b42;
   display: flex;
   padding: 20px;
-  background: #686de0; 
+  background: #b1d1c5; 
 }
 
 nav.navbar .navbar-user{
   margin-left: 10px;
-  color: white;
+  color: #cb9b42;
 }
 
 button.navbar-button {
@@ -26,6 +35,16 @@ button.navbar-button {
 }
 
 #home-btn {
-  color: white;
+  color: #cb9b42;
   text-decoration: none;
+}
+
+.log-cont{
+  display: flex;
+  flex-direction: column;
+  margin: 10%;
+  padding: 10%;
+  background-color: #cb9b42;
+  
+  border-radius: 20px;
 }
