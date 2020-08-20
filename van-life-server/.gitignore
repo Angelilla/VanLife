@@ -59,3 +59,13 @@ typings/
 
 # next.js build output
 .next
+
+# Dependency directory
+node_modules   
+
+# Debug log from npm
+npm-debug.log
+
+package-lock.json
+
+# git 
