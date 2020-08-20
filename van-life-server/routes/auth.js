@@ -17,13 +17,9 @@ const {
 } = require("../helpers/middlewares");
 
 //  POST '/signup'
-router.post('/signup', parser.single('profilepic'), isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
+router.post('/signup', isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
 
     const { username, email, password } = req.body;
-    let image_url;
-    if (req.file){
-        image_url = req.file.secure_url;
-    }
 
     try {
         const usernameExists = await User.findOne({ username }, "username");
@@ -33,9 +29,10 @@ router.post('/signup', parser.single('profilepic'), isNotLoggedIn(), validationL
         else {
             const salt = bcrypt.genSaltSync(saltRounds);
             const hashPass = bcrypt.hashSync(password, salt);
-            const newUser = await User.create({ username, email, password: hashPass, profilepic: image_url });
+            const newUser = await User.create({ username, email, password: hashPass });
 
             req.session.currentUser = newUser;
+            console.log(req.session)
             res
             .status(200) 
             .json(newUser);
@@ -57,6 +54,7 @@ router.post('/login', isNotLoggedIn(), validationLoggin(), async (req, res, next
             next(createError(404));
         } else if (bcrypt.compareSync(password, user.password)) {
             req.session.currentUser = user;
+            //console.log(user)
             res.status(200).json(user);
             return;
         } else {

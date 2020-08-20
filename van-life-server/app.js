@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 
 const auth = require("./routes/auth");
+const users = require('./routes/users')
 
 // MONGOOSE CONNECTION
 mongoose
@@ -51,7 +52,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: {
-      maxAge: 60 * 60 * 1000,
+      maxAge: 5 * 60 * 1000,
     },
   })
 );
@@ -65,6 +66,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTER MIDDLEWARE
 app.use("/auth", auth);
+app.use("/users", users);
 
 app.use('/api', require('./routes/file-upload'));
 
