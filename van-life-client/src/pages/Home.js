@@ -10,6 +10,7 @@ import Private from "./Private";
 
 import AnonRoute from "../components/AnonRoute";
 import PrivateRoute from "../components/PrivateRoute";
+import AddPic from "./AddPic";
 
 class Home extends Component {
   
@@ -23,6 +24,7 @@ class Home extends Component {
             isLoggedin ? 
             (<>
               <p className="navbar-user">username: {user.username}</p>	
+              <AddPic />
               <button className="navbar-button" onClick={logout}>Logout</button>	
             </>) 
           : 
