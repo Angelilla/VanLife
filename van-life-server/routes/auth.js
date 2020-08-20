@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
+
 const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+
 const User = require("../models/User");
+
+const parser = require('./../config/cloudinary');
 
 // HELPER FUNCTIONS
 const {
@@ -13,18 +17,23 @@ const {
 } = require("../helpers/middlewares");
 
 //  POST '/signup'
-router.post('/signup', isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
+router.post('/signup', parser.single('profilepic'), isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
 
     const { username, email, password } = req.body;
+    let image_url;
+    if (req.file){
+        image_url = req.file.secure_url;
+    }
+
     try {
         const usernameExists = await User.findOne({ username }, "username");
         const emailExists = await User.findOne({ email }, "email");
-        //console.log(usernameExists, emailExists)
+       
         if (usernameExists || emailExists) return next(createError(400));
         else {
             const salt = bcrypt.genSaltSync(saltRounds);
             const hashPass = bcrypt.hashSync(password, salt);
-            const newUser = await User.create({ username, email, password: hashPass });
+            const newUser = await User.create({ username, email, password: hashPass, profilepic: image_url });
 
             req.session.currentUser = newUser;
             res

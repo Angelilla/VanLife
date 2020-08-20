@@ -9,7 +9,7 @@ const userSchema = new Schema({
         unique: true 
     },
     password: { type: String, minlength: 6, required: true },
-    profilepic: { type: String, default: '/images/icon-userdefault.png' },
+    profilepic: { type: String, default: '/images/logo.jpeg' },
     createdtrips: [{ type: Schema.Types.ObjectId, ref: 'Trip' }],
     favoritetrips: [{ type: Schema.Types.ObjectId, ref: 'Trip' }]
     
