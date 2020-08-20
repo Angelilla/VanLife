@@ -7,7 +7,7 @@ const saltRounds = 10;
 
 const User = require("../models/User");
 
-const parser = require('./../config/cloudinary');
+//const parser = require('./../config/cloudinary');
 
 // HELPER FUNCTIONS
 const {
