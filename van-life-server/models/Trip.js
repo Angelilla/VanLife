@@ -6,9 +6,11 @@ const tripSchema = new Schema({
     //initlocation: String,
     //finallocation: String,
     traveler: { type: Schema.Types.ObjectId, ref: 'User' },
+    followers: [ { type: Schema.Types.ObjectId, ref: 'User' } ],
     comments: [{
         review: String,
-        creator: { type: Schema.Types.ObjectId, ref: 'User' }}],
+        creator: { type: Schema.Types.ObjectId, ref: 'User' }
+    }],
     initdate: Date,
     gallery: []
 });
