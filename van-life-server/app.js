@@ -11,7 +11,8 @@ const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 
 const auth = require("./routes/auth");
-const users = require('./routes/users')
+const users = require('./routes/users');
+const trips = require('./routes/trips');
 
 // MONGOOSE CONNECTION
 mongoose
@@ -67,6 +68,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // ROUTER MIDDLEWARE
 app.use("/auth", auth);
 app.use("/users", users);
+app.use("/trips", trips);
 
 app.use('/api', require('./routes/file-upload'));
 

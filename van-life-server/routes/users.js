@@ -1,18 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const {
-  isLoggedIn,
-  isNotLoggedIn,
-  validationLoggin,
-} = require("../helpers/middlewares");
+const { isLoggedIn } = require("../helpers/middlewares");
 
-const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const User = require("../models/User");
-
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -27,7 +21,7 @@ router.get('/profile', isLoggedIn(), (req, res, next) => {
 
   User
       .findById(currUser)
-      //.populate ('createdtrips favoritetrips')
+      .populate ('createdtrips favoritetrips')
       .then((response) => res.json(response))
       .catch(error => {
           console.log(error);

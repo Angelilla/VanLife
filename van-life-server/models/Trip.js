@@ -3,19 +3,16 @@ const Schema   = mongoose.Schema;
 
 const tripSchema = new Schema({
     name: String,
-    //map
-    //initlocation
-    //finallocation
+    //initlocation: String,
+    //finallocation: String,
     traveler: { type: Schema.Types.ObjectId, ref: 'User' },
     comments: [{
         review: String,
-        creator: { type: Schema.Types.ObjectId, ref: 'User' },
-        rating: { type: Number, min: 1, max: 5 }}],
-    initdate: Date
-    //gallery
-    //markers
+        creator: { type: Schema.Types.ObjectId, ref: 'User' }}],
+    initdate: Date,
+    gallery: []
 });
 
-const Trip = mongoose.model("User", tripSchema);
+const Trip = mongoose.model("Trip", tripSchema);
 
 module.exports = Trip;
