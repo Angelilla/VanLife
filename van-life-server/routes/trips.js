@@ -16,7 +16,7 @@ router.post('/new-trip', isLoggedIn(), (req, res, next) => {
     .then(newTrip => {
 
       console.log(newTrip)
-      res.json(newTrip)
+      
 
       const tripId = newTrip._id;
       User.findByIdAndUpdate(
@@ -26,13 +26,15 @@ router.post('/new-trip', isLoggedIn(), (req, res, next) => {
       )
       .then((user) => {
         console.log(user);
+        res.json(user)
       })
       .catch(error => {
         console.log(error);
       });
 
     })
-    //.status(200) 
+    //.status(200)
+    res.json(newTrip) 
     
     .catch(error => {
       console.log('Error while create the trip: ', error);
@@ -66,8 +68,6 @@ router.post('/:id/delete', isLoggedIn(), (req, res, params) => {
     .findByIdAndDelete(req.params.id)
     .then(delTrip => {
 
-      res.json(delTrip)
-
       User
         .findByIdAndUpdate(
           currUser,
@@ -76,10 +76,13 @@ router.post('/:id/delete', isLoggedIn(), (req, res, params) => {
         )
         .then((user) => {
           console.log(user);
+          res.json(user)
         })
         .catch(error => {
           console.log(error);
         });
+
+        res.json(delTrip)
     })
     .catch(error => {
       console.log(error);
@@ -98,7 +101,6 @@ router.post('/:id/add-favourite', isLoggedIn(), (req, res, params) => {
     .then(favouriteTrip => {
 
       console.log(favouriteTrip)
-      //res.json(favouriteTrip)
 
       User
         .findByIdAndUpdate(
@@ -108,12 +110,14 @@ router.post('/:id/add-favourite', isLoggedIn(), (req, res, params) => {
         )
         .then((user) => {
             //console.log(user);
+            res.json(user)
         })
         .catch(error => {
           console.log(error);
         });
+
+        res.json(favouriteTrip)
     })
-    res.json(data)
     .catch(error => {
       console.log(error);
     });
@@ -133,7 +137,7 @@ router.post('/:id/delete-favourite', isLoggedIn(), (req, res, params) => {
     .then(favouriteTrip => {
 
       console.log(favouriteTrip)
-      res.json(favouriteTrip)
+      
       
       User
         .findByIdAndUpdate(
@@ -143,10 +147,14 @@ router.post('/:id/delete-favourite', isLoggedIn(), (req, res, params) => {
         )
         .then((user) => {
           console.log(user);
+          res.json(user)
         })
         .catch(error => {
           console.log(error);
         });
+
+        res.json(favouriteTrip)
+
     })
     .catch(error => {
       console.log('Error deleting the trip: ', error);
